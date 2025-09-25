@@ -1,0 +1,709 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700&family=Playfair+Display:wght@300;400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    font-family: 'Inter', system-ui, sans-serif;
+    scroll-behavior: smooth;
+  }
+  
+  body {
+    background-color: #0a0a0a;
+    color: #ffffff;
+    font-weight: 300;
+    line-height: 1.6;
+  }
+  
+  .font-display {
+    font-family: 'Playfair Display', serif;
+  }
+}
+
+@layer components {
+  .glass-effect {
+    @apply bg-black/20 backdrop-blur-xl border border-white/5;
+  }
+  
+  .gradient-text {
+    @apply bg-gradient-to-r from-white via-gray-200 to-gray-400 bg-clip-text text-transparent;
+  }
+  
+  .card-hover {
+    @apply transition-all duration-700 hover:scale-[1.01] hover:shadow-2xl;
+  }
+  
+  .btn-primary {
+    @apply bg-transparent text-white px-12 py-4 font-light tracking-[0.2em] uppercase text-xs hover:bg-white hover:text-black transition-all duration-500 hover:scale-105 hover:shadow-lg;
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    border-radius: 0;
+    outline: none;
+    box-sizing: border-box;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+  }
+  
+  /* Compact size modifier to reduce inner spacing */
+  .btn-compact {
+    padding: 0.5rem 1rem; /* 8px 16px */
+  }
+
+  @media (min-width: 640px) {
+    .btn-compact {
+      padding: 0.625rem 1.25rem; /* 10px 20px */
+    }
+  }
+  
+  .btn-secondary {
+    @apply bg-white text-black px-12 py-4 font-light tracking-[0.2em] uppercase text-xs hover:bg-gray-200 transition-all duration-500;
+  }
+  
+  .section-padding {
+    @apply py-32 px-4 sm:px-6 lg:px-8;
+  }
+
+  .hero-section {
+    @apply min-h-screen bg-cover bg-center bg-no-repeat relative;
+  }
+
+  /* Enable fixed background only on medium+ screens for better mobile perf */
+  @media (min-width: 768px) {
+    .hero-section {
+      background-attachment: fixed;
+    }
+  }
+
+  .hero-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.3) 50%, rgba(0,0,0,0.7) 100%);
+    z-index: 1;
+  }
+
+  .overlay-dark {
+    @apply absolute inset-0 bg-black/50;
+    z-index: 2;
+  }
+
+  .text-overlay {
+    @apply absolute inset-0 flex items-center justify-start;
+    z-index: 3;
+  }
+
+  .minimal-nav {
+  @apply fixed top-0 w-full z-50 bg-black border-b border-white/5;
+  }
+
+  .logo-text {
+  @apply text-base sm:text-lg md:text-xl font-light uppercase;
+  letter-spacing: 0.2em;
+  }
+
+  .nav-link {
+    @apply text-white/60 hover:text-white transition-colors duration-500 text-xs tracking-[0.2em] uppercase font-light;
+  }
+
+  .section-title {
+    @apply text-4xl md:text-6xl font-extralight tracking-[0.1em] uppercase mb-12 leading-none;
+  }
+
+  .section-subtitle {
+    @apply text-xs tracking-[0.4em] uppercase text-gray-500 mb-6 font-light;
+  }
+
+  .content-grid {
+    @apply grid grid-cols-1 lg:grid-cols-2 gap-20 items-start;
+  }
+
+  .image-container {
+    @apply relative overflow-hidden bg-black;
+  }
+
+  .image-overlay {
+    @apply absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent;
+  }
+
+  .minimal-card {
+    @apply bg-black/40 backdrop-blur-sm border border-white/5 p-12 hover:bg-black/60 transition-all duration-700 hover:scale-[1.02] hover:shadow-2xl;
+  }
+
+  .project-grid {
+    @apply grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-0;
+  }
+
+  .project-item {
+    @apply relative aspect-square overflow-hidden cursor-pointer bg-black;
+  }
+
+  .project-overlay {
+    @apply absolute inset-0 bg-black/80 opacity-0 transition-all duration-700 flex items-center justify-center;
+  }
+
+  .hamburger {
+    @apply flex flex-col space-y-1.5 cursor-pointer;
+  }
+
+  .hamburger-line {
+    @apply w-8 h-px bg-white transition-all duration-300;
+  }
+
+  .mobile-menu {
+    @apply fixed inset-0 bg-black z-50 flex items-center justify-center overflow-y-auto;
+    padding-top: max(env(safe-area-inset-top, 0px), 1rem);
+    padding-bottom: max(env(safe-area-inset-bottom, 0px), 1rem);
+  }
+
+  .mobile-nav-links {
+  @apply flex flex-col space-y-8 md:space-y-12 text-center py-12;
+  }
+
+  .mobile-nav-link {
+  @apply text-2xl sm:text-3xl md:text-5xl font-extralight tracking-[0.1em] text-white/80 hover:text-white transition-colors duration-500 uppercase px-4;
+  }
+
+  .architectural-grid {
+    @apply grid grid-cols-12 gap-8;
+  }
+
+  .content-block {
+    @apply col-span-12 lg:col-span-8;
+  }
+
+  .sidebar-block {
+    @apply col-span-12 lg:col-span-4;
+  }
+
+  .text-large {
+    @apply text-xl font-light leading-relaxed text-gray-300;
+  }
+
+  .text-body {
+    @apply text-base font-light leading-relaxed text-gray-400;
+  }
+
+  .divider-line {
+    @apply w-full h-px bg-white/10 my-16;
+  }
+
+  .minimal-border {
+    @apply border border-white/10;
+  }
+
+  .elegant-spacing {
+    @apply space-y-16;
+  }
+
+  .container-minimal {
+    @apply max-w-7xl mx-auto px-6 lg:px-12;
+  }
+
+  .page-header {
+    @apply pt-32 pb-20;
+  }
+
+  .architectural-text {
+    @apply font-light tracking-wide leading-relaxed;
+  }
+
+  .category-tag {
+    @apply text-xs tracking-[0.3em] uppercase font-light px-4 py-2 border border-white/20 text-white/80;
+  }
+
+  .hover-lift {
+    @apply transition-transform duration-700 hover:-translate-y-1;
+  }
+
+  .fade-in {
+    @apply opacity-0 animate-fade-in;
+  }
+
+  .slide-up {
+    @apply translate-y-8 opacity-0 animate-slide-up;
+  }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 1px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0a0a0a;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #333;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+/* Typography refinements */
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 200;
+  letter-spacing: 0.05em;
+  line-height: 1.2;
+}
+
+p {
+  line-height: 1.8;
+  color: #cccccc;
+  font-weight: 300;
+}
+
+/* Form styles */
+input, textarea, select {
+  @apply bg-transparent border-0 border-b border-white/20 text-white placeholder-gray-500 focus:border-white/60 focus:outline-none transition-all duration-500 font-light;
+}
+
+/* Button animations */
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.5);
+}
+
+/* Fix for button border rendering */
+.btn-primary {
+  border-style: solid !important;
+  border-width: 1px !important;
+  border-color: rgba(255, 255, 255, 0.3) !important;
+  border-image: none !important;
+  background-clip: padding-box;
+  overflow: visible;
+  white-space: nowrap;
+}
+
+/* Ensure button content is properly contained */
+.btn-primary span {
+  display: inline-block;
+  position: relative;
+  z-index: 1;
+}
+
+.btn-primary svg {
+  margin-left: 0.5rem; /* space from text */
+  width: 1rem;
+  height: 1rem;
+  position: relative;
+  z-index: 1;
+  transition: transform 0.3s ease;
+}
+
+.btn-secondary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+}
+
+/* Image effects */
+img {
+  transition: transform 1s ease, filter 0.5s ease;
+  filter: grayscale(20%) contrast(1.1);
+}
+
+.group:hover img {
+  transform: scale(1.02);
+  filter: grayscale(0%) contrast(1.2);
+}
+
+/* Enhanced hover effects */
+.hover-lift:hover {
+  transform: translateY(-5px);
+  transition: transform 0.3s ease;
+}
+
+.hover-glow:hover {
+  box-shadow: 0 0 30px rgba(255, 255, 255, 0.1);
+  transition: box-shadow 0.3s ease;
+}
+
+.hover-scale:hover {
+  transform: scale(1.05);
+  transition: transform 0.3s ease;
+}
+
+/* Modal styles */
+.modal-backdrop {
+  backdrop-filter: blur(8px);
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+.modal-content {
+  background: linear-gradient(135deg, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0.8) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Timeline styles */
+.timeline-dot {
+  position: relative;
+}
+
+.timeline-dot::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 12px;
+  height: 12px;
+  background: white;
+  border-radius: 50%;
+  border: 3px solid black;
+}
+
+/* Enhanced timeline visibility */
+.timeline-line {
+  background: linear-gradient(to bottom, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0.1) 100%);
+}
+
+.timeline-step-number {
+  text-shadow: 0 0 20px rgba(255,255,255,0.1);
+}
+
+/* Mobile timeline adjustments */
+@media (max-width: 1024px) {
+  .timeline-container {
+    padding-left: 2rem;
+  }
+  
+  .timeline-dot-mobile {
+    position: absolute;
+    left: -1rem;
+    top: 0;
+    width: 8px;
+    height: 8px;
+    background: white;
+    border-radius: 50%;
+    border: 2px solid black;
+  }
+}
+
+/* Filter button styles */
+.filter-button {
+  transition: all 0.3s ease;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.filter-button:hover {
+  border-color: rgba(255, 255, 255, 0.4);
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+.filter-button.active {
+  border-color: rgba(255, 255, 255, 0.8);
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Group hover effects */
+.group:hover .project-overlay {
+  opacity: 1;
+}
+
+/* Loading states */
+.loading {
+  @apply animate-pulse;
+}
+
+/* Responsive typography */
+@media (max-width: 768px) {
+  .section-title {
+    @apply text-3xl md:text-4xl;
+  }
+  
+  .container-minimal {
+    @apply px-4;
+  }
+  
+  .content-grid {
+    @apply gap-12;
+  }
+}
+
+/* Minimal form styling */
+.minimal-form input,
+.minimal-form textarea,
+.minimal-form select {
+  @apply bg-transparent border-0 border-b border-white/20 rounded-none px-0 py-6 focus:border-white/60 text-lg font-light;
+}
+
+/* Elegant hover effects */
+.elegant-hover {
+  position: relative;
+  overflow: hidden;
+}
+
+.elegant-hover::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.05), transparent);
+  transition: left 0.8s ease;
+}
+
+.elegant-hover:hover::before {
+  left: 100%;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.animate-fade-in {
+  animation: fadeIn 1s ease-out forwards;
+}
+
+.animate-slide-up {
+  animation: slideUp 0.8s ease-out forwards;
+}
+
+
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+.animate-pulse {
+  animation: pulse 2s ease-in-out infinite;
+}
+
+.animate-shimmer {
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+  background-size: 200% 100%;
+  animation: shimmer 2s infinite;
+}
+
+/* Text selection */
+::selection {
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+}
+
+/* Focus states */
+button:focus,
+a:focus {
+  outline: 1px solid rgba(255, 255, 255, 0.2);
+  outline-offset: 4px;
+}
+
+/* Architectural spacing system */
+.space-architectural > * + * {
+  margin-top: 6rem;
+}
+
+@media (max-width: 768px) {
+  .space-architectural > * + * {
+    margin-top: 3rem;
+  }
+}
+
+/* Grid system for architectural layouts */
+.grid-architectural {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 2rem;
+}
+
+.col-span-full {
+  grid-column: 1 / -1;
+}
+
+.col-span-8 {
+  grid-column: span 8;
+}
+
+.col-span-4 {
+  grid-column: span 4;
+}
+
+@media (max-width: 1024px) {
+  .col-span-8,
+  .col-span-4 {
+    grid-column: 1 / -1;
+  }
+}
+
+/* Backdrop effects */
+.backdrop-architectural {
+  backdrop-filter: blur(40px) brightness(0.2) saturate(1.2);
+}
+
+/* Text effects */
+.text-shadow-soft {
+  text-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+/* Layout utilities */
+.full-viewport {
+  min-height: 100vh;
+}
+
+.center-absolute {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/* Elegant transitions */
+.transition-elegant {
+  transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Modal and overlay styles */
+.modal-backdrop {
+  @apply fixed inset-0 bg-black/90 backdrop-blur-xl z-50;
+}
+
+.modal-content {
+  @apply bg-black/80 backdrop-blur-xl border border-white/10 max-w-6xl w-full max-h-[90vh] overflow-y-auto;
+}
+
+/* Progress indicators */
+.progress-bar {
+  @apply w-full bg-white/10 h-px;
+}
+
+.progress-fill {
+  @apply bg-white h-px transition-all duration-1000 ease-out;
+}
+
+/* Card variations */
+.card-minimal {
+  @apply bg-transparent border border-white/10 p-8 hover:border-white/20 transition-all duration-500;
+}
+
+.card-elevated {
+  @apply bg-black/60 backdrop-blur-sm border border-white/10 p-8 hover:bg-black/80 transition-all duration-500;
+}
+
+/* Typography scale */
+.text-display {
+  @apply text-8xl font-extralight tracking-[0.1em] leading-none;
+}
+
+.text-headline {
+  @apply text-5xl font-light tracking-wide leading-tight;
+}
+
+.text-title {
+  @apply text-3xl font-light tracking-wide leading-snug;
+}
+
+.text-subtitle {
+  @apply text-xl font-light tracking-wide leading-relaxed;
+}
+
+.text-caption {
+  @apply text-sm font-light tracking-[0.2em] uppercase;
+}
+
+/* Responsive adjustments */
+@media (max-width: 640px) {
+  .text-display {
+    @apply text-5xl;
+  }
+  
+  .text-headline {
+    @apply text-3xl;
+  }
+  
+  .section-padding {
+    @apply py-20;
+  }
+}
+
+/* Print styles */
+@media print {
+  .minimal-nav,
+  .mobile-menu,
+  .btn-primary,
+  .btn-secondary {
+    display: none;
+  }
+  
+  body {
+    background: white;
+    color: black;
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .text-gray-400 {
+    color: #ffffff;
+  }
+  
+  .border-white\/10 {
+    border-color: rgba(255, 255, 255, 0.3);
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
